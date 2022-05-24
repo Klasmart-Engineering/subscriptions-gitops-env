@@ -17,7 +17,7 @@
 
 
 
-resource "kubernetes_namespace" "offering" {
+resource "kubernetes_namespace" "product" {
   metadata {
 # TODO: Take the labels from the controller module output = they contain istio.io/rev for managing istio version
     name = var.product_namespace
