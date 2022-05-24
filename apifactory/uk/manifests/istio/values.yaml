@@ -1,0 +1,9 @@
+istio-microgateway-networking:
+  nameOverride: "subscriptions-microgateway"
+  fullNameOverride: subscriptions-microgateway
+  domain: apifactory.kidsloop.live
+  subdomain: subscriptions
+  serviceName: subscriptions-microgateway
+  istio:
+    certIssuerName: letsencrypt-istio-dns
+    namespace: istio-system
