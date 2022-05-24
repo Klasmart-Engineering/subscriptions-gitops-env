@@ -15,5 +15,5 @@ locals {
   )
 
   # Passthrough
-  name_suffix = "${var.project-environment}-${var.project-region}"
+  name_suffix = "${var.project_environment}-${var.project_region}"
 }
