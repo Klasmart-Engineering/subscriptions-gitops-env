@@ -1,7 +1,7 @@
 resource "argocd_application" "microgateway" {
   metadata {
-    name      = "${local.name_prefix}-microgateway"
-    namespace = "argocd"
+    name      = "microgateway-${local.name_suffix}"
+    namespace = var.argocd_namespace
     labels = {
       region = var.region
       env    = var.project_environment
@@ -25,7 +25,7 @@ resource "argocd_application" "microgateway" {
 
     destination {
       server    = var.kubernetes_server_url
-      namespace = var.offering_namespace
+      namespace = var.product_namespace
     }
     sync_policy {
       automated = {
@@ -46,8 +46,8 @@ resource "argocd_application" "microgateway" {
 
 resource "argocd_application" "istio" {
   metadata {
-    name      = "${local.name_prefix}-istio-configuration"
-    namespace = "argocd"
+    name      = "istio-config-${local.name_suffix}"
+    namespace = var.argocd_namespace
     labels = {
       region = var.region
       env    = var.project_environment
@@ -71,8 +71,9 @@ resource "argocd_application" "istio" {
 
     destination {
       server    = var.kubernetes_server_url
-      namespace = var.offering_namespace
+      namespace = var.product_namespace
     }
+    
     sync_policy {
       automated = {
         prune       = true

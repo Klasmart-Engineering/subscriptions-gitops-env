@@ -16,10 +16,10 @@ module "service_instance" {
 
   # Kubernetes
   kubernetes_server_url = local.cluster_endpoint
-  offering_namespace = local.offering_namespace
+  product_namespace = local.product_namespace
 
   # ArgoCD
-  argocd_namespace = "argocd"
+  argocd_namespace = local.argocd_namespace
   argocd_project = local.argocd_project_name
 
   # Helm

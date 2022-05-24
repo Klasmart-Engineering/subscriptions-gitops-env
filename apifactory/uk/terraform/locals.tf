@@ -1,15 +1,14 @@
 locals {
   # TFC inputs
   terraform_organization = "kidsloop-infrastructure"
-  working_directory      = "uk-apifactory"
+  infra_environment_directory      = "uk-apifactory"
 
   # Imported dependencies (mark as non-sensitive)
-  # dep_meta     = nonsensitive(data.tfe_outputs.meta.values)
-  # dep_account  = nonsensitive(data.tfe_outputs.account.values)
-  # dep_network  = nonsensitive(data.tfe_outputs.network.values)
-  # dep_cluster  = nonsensitive(data.tfe_outputs.cluster.values)
+  dep_meta    = nonsensitive(data.tfe_outputs.meta.values)
+    dep_account  = nonsensitive(data.tfe_outputs.account.values)
+      dep_cluster  = nonsensitive(data.tfe_outputs.cluster.values)
   dep_tools    = nonsensitive(data.tfe_outputs.cluster-infra-tools.values)
-  dep_offering = nonsensitive(data.tfe_outputs.service-meta-data.values)
+  dep_product = nonsensitive(data.tfe_outputs.common-infrastructure.values)
 
   # Global EKS Variables
   cluster_endpoint                      = local.dep_cluster.cluster_endpoint
@@ -23,6 +22,7 @@ locals {
   tools_kubeconfig_certificate_authority_data = local.dep_tools.kubeconfig_certificate_authority_data
 
   # ArgoCD Project
-  argocd_project_name                         = local.dep_offering.argocd_project_name
-  offering_namespace                         = local.dep_offering.offering_namespace
+  argocd_project_name                         = local.dep_product.argocd_project_name
+  argocd_namespace = "argocd"
+  product_namespace                         = local.dep_product.product_namespace
 }
