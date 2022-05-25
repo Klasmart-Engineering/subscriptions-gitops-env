@@ -4,11 +4,11 @@ locals {
   infra_environment_directory      = "uk-apifactory"
 
   # Imported dependencies (mark as non-sensitive)
-  dep_meta    = nonsensitive(data.tfe_outputs.meta.values)
-    dep_account  = nonsensitive(data.tfe_outputs.account.values)
-      dep_cluster  = nonsensitive(data.tfe_outputs.cluster.values)
-  dep_tools    = nonsensitive(data.tfe_outputs.cluster-infra-tools.values)
-  dep_product = nonsensitive(data.tfe_outputs.common-infrastructure.values)
+  dep_meta      = nonsensitive(data.tfe_outputs.meta.values)
+  dep_account   = nonsensitive(data.tfe_outputs.account.values)
+  dep_cluster   = nonsensitive(data.tfe_outputs.cluster.values)
+  dep_tools     = nonsensitive(data.tfe_outputs.cluster-infra-tools.values)
+  dep_product   = nonsensitive(data.tfe_outputs.common-infrastructure.values)
 
   # Global EKS Variables
   cluster_endpoint                      = local.dep_cluster.cluster_endpoint
