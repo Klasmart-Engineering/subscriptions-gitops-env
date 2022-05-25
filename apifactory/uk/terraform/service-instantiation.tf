@@ -1,6 +1,6 @@
 module "service_instance" {
   # Module import info here
-  source  = "./modules/subscriptions-terraform-svc"
+  source  = "git@github.com:KL-Engineering/subscriptions-terraform-svc.git?ref=v0.1.0"
 
   # Passthrough inputs
   region              = local.dep_meta.region
