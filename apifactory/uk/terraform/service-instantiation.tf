@@ -1,6 +1,6 @@
 module "service_instance" {
   # Module import info here
-  source  = "git@github.com:KL-Engineering/subscriptions-terraform-svc.git?ref=v0.3.0"
+  source  = "git@github.com:KL-Engineering/subscriptions-terraform-svc.git?ref=${local.module_version}"
 
   # Passthrough inputs
   region              = local.dep_meta.region
@@ -28,7 +28,7 @@ module "service_instance" {
   microgateway_helm_chart_revision = "HEAD"
   istio_helm_chart_revision = "HEAD"
 
-  domain = "apifactory.kidsloop.live"
+  domain = local.domain
 
   providers = {
     aws            = aws

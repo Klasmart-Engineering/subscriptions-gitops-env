@@ -1,7 +1,6 @@
 locals {
   # TFC inputs
   terraform_organization = "kidsloop-infrastructure"
-  infra_environment_directory      = "uk-apifactory"
 
   # Imported dependencies (mark as non-sensitive)
   dep_meta      = nonsensitive(data.tfe_outputs.meta.values)

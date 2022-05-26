@@ -2,7 +2,7 @@ terraform {
   cloud {
     organization = "kidsloop-infrastructure"
     workspaces {
-      name = "subscriptions-apifactory-uk"
+      name = local.tfe_workspace
     }
   }
 }
