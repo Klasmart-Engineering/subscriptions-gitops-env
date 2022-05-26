@@ -25,4 +25,4 @@ appVersion: 0.0.1
 dependencies:
   - name: kl-base-microgateway
     repository: https://raw.githubusercontent.com/kl-engineering/microgateway-base-helm/main
-    version: 0.1.0
+    version: 0.2.0
