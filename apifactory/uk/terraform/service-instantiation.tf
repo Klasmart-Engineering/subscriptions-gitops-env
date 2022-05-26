@@ -17,7 +17,7 @@ module "service_instance" {
   # Kubernetes
   kubernetes_server_url = local.cluster_endpoint
   product_namespace = local.product_namespace
-  container_registry_credentials = var.container_registry_credentials
+  container_registry_credentials = local.container_registry_credentials
 
   # ArgoCD
   argocd_namespace = local.argocd_namespace

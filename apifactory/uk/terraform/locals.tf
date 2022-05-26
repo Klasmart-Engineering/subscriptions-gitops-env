@@ -25,4 +25,12 @@ locals {
   argocd_project_name                         = local.dep_product.argocd_project_name
   argocd_namespace = "argocd"
   product_namespace                         = local.dep_product.product_namespace
+
+  container_registry_credentials = jsonencode({
+      auths = {
+        "ghcr.io" = {
+          "auth"     = base64encode(var.ghcr_credentials)
+        }
+      }
+    })
 }

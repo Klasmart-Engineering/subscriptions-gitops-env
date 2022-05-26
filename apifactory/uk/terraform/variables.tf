@@ -3,7 +3,7 @@ variable "tools_cluster_tfc_sa_token" {
   type        = string
 }
 
-variable "container_registry_credentials" {
+variable "ghcr_credentials" {
   description = "Registry credentials for k8s to pull application images"
   type        = string
 }
