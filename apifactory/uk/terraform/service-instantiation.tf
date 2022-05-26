@@ -1,6 +1,6 @@
 module "service_instance" {
   # Module import info here
-  source  = "git@github.com:KL-Engineering/subscriptions-terraform-svc.git?ref=v0.1.0"
+  source  = "git@github.com:KL-Engineering/subscriptions-terraform-svc.git?ref=v0.2.0"
 
   # Passthrough inputs
   region              = local.dep_meta.region
@@ -17,6 +17,7 @@ module "service_instance" {
   # Kubernetes
   kubernetes_server_url = local.cluster_endpoint
   product_namespace = local.product_namespace
+  container_registry_credentials = var.container_registry_credentials
 
   # ArgoCD
   argocd_namespace = local.argocd_namespace
