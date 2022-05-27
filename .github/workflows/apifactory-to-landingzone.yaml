@@ -16,7 +16,7 @@ on:
 
 jobs:
   call_propagate:
-    uses: ./.github/workflows/propagate.yaml
+    uses: KL-Engineering/github-action-workflows/.github/workflows/propagate-release-candidate.yaml@v3.3.0
     with:
       base_ref: ${{ github.event.inputs.base_ref }}
       target_ref: ${{ github.event.inputs.target_ref }}
