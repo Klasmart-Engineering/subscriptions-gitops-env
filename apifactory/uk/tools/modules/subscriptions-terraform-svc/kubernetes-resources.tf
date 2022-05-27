@@ -31,7 +31,7 @@ resource "kubernetes_secret" "tfc-token" {
   }
 
   data = {
-    "credentials" = "credentials app.terraform.io {token = \"$TERRAFORM_CLOUD_API_TOKEN\"})"
+    "credentials" = "credentials app.terraform.io {token = \"$TERRAFORM_CLOUD_API_TOKEN\"}"
   }
   type = "Opaque"
 }
