@@ -1,4 +1,4 @@
-name: Propagate configurations
+name: Propagate release candidate
 
 permissions:
   contents: write
@@ -6,6 +6,19 @@ permissions:
 
 on:
   workflow_dispatch:
+    inputs:
+    base_ref:
+      required: true
+      type: string
+    target_ref:
+      required: true
+      type: string
+    base_env:
+      required: true
+      type: string
+    target_env:
+      required: true
+      type: string
   workflow_call:
     inputs:
       base_ref:
@@ -32,11 +45,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: generate diff
+      - name: Generate changeset
         id: generate-diff
         run: |
           git format-patch ${{ inputs.base_ref }} ${{ inputs.target_ref }} -o /tmp/patches ${{ inputs.base_env }}
-          
+
           FILES="tmp/patches/*.patch"
           for f in $FILES 
           do
@@ -58,13 +71,13 @@ jobs:
             echo "::set-output name=pr-branch-name::$BRANCH_NAME"
           fi
 
-      - name: Create Pull Request
+      - name: Create pull request
         uses: peter-evans/create-pull-request@v4
         if: steps.generate-diff.outputs.commit-status != 'no-commit'
         with:
           branch: ${{ steps.generate-diff.outputs.pr-branch-name }}
           delete-branch: true
-          title: 'Propagate release candidate from ${{ inputs.base_env }} into ${{ inputs.target_env }}'
+          title: "Propagate release candidate from ${{ inputs.base_env }} into ${{ inputs.target_env }}"
           body: |
             The changes in the files between version ${{ inputs.base_ref }} and ${{ inputs.target_ref }} in environment ${{ inputs.base_env }}
             has been applied to the ${{ inputs.target_env }}
