@@ -19,6 +19,9 @@ on:
       target_env:
         required: true
         type: string
+    secrets:
+      github-token:
+        required: true
 
 jobs:
   propagate:
@@ -30,6 +33,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with: 
+          fetch-depth: 0
 
       - name: Generate changeset
         id: generate-diff
@@ -58,15 +63,35 @@ jobs:
           fi
 
       - name: Create pull request
-        uses: peter-evans/create-pull-request@v4
+        uses: actions/github-script@v6
         if: steps.generate-diff.outputs.commit-status != 'no-commit'
         with:
-          branch: ${{ steps.generate-diff.outputs.pr-branch-name }}
-          delete-branch: true
-          title: "Propagate release candidate from ${{ inputs.base_env }} into ${{ inputs.target_env }}"
-          body: |
-            The changes in the files between version ${{ inputs.base_ref }} and ${{ inputs.target_ref }} in environment ${{ inputs.base_env }}
-            has been applied to the ${{ inputs.target_env }}
-          labels: |
-            automated pr
-            release candidate
+          github-token: ${{ secrets.github-token }}
+          script: |
+            const splitGateway = '${{ github.repository }}'.split('/');
+            const owner = splitGateway[0];
+            const repo = splitGateway[1];
+            const head = '${{ steps.generate-diff.outputs.pr-branch-name }}';
+            const result = await github.rest.pulls.create({
+              title: '[Propagate] from ${{ inputs.base_env }} to ${{ inputs.target_env }}',
+              owner,
+              repo,
+              head,
+              base: 'main',
+              body: [
+                ':bangbang: :robot: This PR is auto-generated',
+                '',
+                '|         | From | TO |',
+                '| ------- | ---| :-------------:|',
+                '| Environment | `${{ inputs.base_env }}` | `${{ inputs.target_env }}` |',
+                '| Ref | `${{ inputs.base_ref }}` | `${{ inputs.target_ref }}` |',
+                '',
+                'Please review and merge this when you want to deploy the release.'
+              ].join('\n')
+            });
+            github.rest.issues.addLabels({
+              owner,
+              repo,
+              issue_number: result.data.number,
+              labels: ['automated pr', 'release']
+            });

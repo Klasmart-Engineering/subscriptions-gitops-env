@@ -6,12 +6,21 @@ permissions:
 
 on:
   workflow_dispatch:
+    inputs:
+      base_ref:
+        required: true
+        type: string
+      target_ref:
+        required: true
+        type: string
 
 jobs:
   call_propagate:
     uses: ./.github/workflows/propagate.yaml
     with:
-      base_ref: 4a273d16
-      target_ref: MAIN
+      base_ref: ${{ github.event.inputs.base_ref }}
+      target_ref: ${{ github.event.inputs.target_ref }}
       base_env: apifactory/uk/manifests
       target_env: landingzone/global/manifests
+    secrets:
+      github-token: ${{ secrets.GATEWAY_CONFIG_SYNC_BOT }}
