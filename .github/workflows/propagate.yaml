@@ -5,7 +5,7 @@ permissions:
   pull-requests: write
 
 on:
-  workflow_dispatch:
+  workflow_call:
     inputs:
       base_ref:
         required: true
