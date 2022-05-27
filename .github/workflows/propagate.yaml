@@ -19,20 +19,6 @@ on:
       target_env:
         required: true
         type: string
-  workflow_call:
-    inputs:
-      base_ref:
-        required: true
-        type: string
-      target_ref:
-        required: true
-        type: string
-      base_env:
-        required: true
-        type: string
-      target_env:
-        required: true
-        type: string
 
 jobs:
   propagate:
@@ -50,7 +36,7 @@ jobs:
         run: |
           git format-patch ${{ inputs.base_ref }} ${{ inputs.target_ref }} -o /tmp/patches ${{ inputs.base_env }}
 
-          FILES="tmp/patches/*.patch"
+          FILES="/tmp/patches/*.patch"
           for f in $FILES 
           do
             git apply -p4 --directory="${{ inputs.target_env }}" $f
