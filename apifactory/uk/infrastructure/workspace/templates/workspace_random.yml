@@ -21,7 +21,7 @@ spec:
     - key: hellos
       value: |
         {
-          hello="world"
+          hello="pet"
           second_hello="universe"
         }
       hcl: true
@@ -30,10 +30,6 @@ spec:
     - key: some_key
       sensitive: false
       value: '"something"'
-      environmentVariable: false
-    - key: my_variable_override
-      sensitive: false
-      value: {{ .Values.variable_override }}
       environmentVariable: false
     - key: CONFIRM_DESTROY
       value: "1"

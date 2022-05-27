@@ -4,4 +4,3 @@
 
 fullnameOverride: "workspace-apifactory-uk"
 tf_organization: "kidsloop-infrastructure"
-variable_override: "we made it"
