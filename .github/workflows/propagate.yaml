@@ -7,18 +7,18 @@ permissions:
 on:
   workflow_dispatch:
     inputs:
-    base_ref:
-      required: true
-      type: string
-    target_ref:
-      required: true
-      type: string
-    base_env:
-      required: true
-      type: string
-    target_env:
-      required: true
-      type: string
+      base_ref:
+        required: true
+        type: string
+      target_ref:
+        required: true
+        type: string
+      base_env:
+        required: true
+        type: string
+      target_env:
+        required: true
+        type: string
   workflow_call:
     inputs:
       base_ref:
