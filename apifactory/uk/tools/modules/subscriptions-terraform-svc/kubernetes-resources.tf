@@ -23,7 +23,7 @@ resource "kubernetes_namespace" "offering" {
   }
 }
 
-# Create secret to allow kubernetes access to the Container Registry
+# Create secret to allow kubernetes to access terraform cloud
 resource "kubernetes_secret" "tfc-token" {
   metadata {
     name = "terraformrc"
@@ -32,6 +32,19 @@ resource "kubernetes_secret" "tfc-token" {
 
   data = {
     "credentials" = "credentials app.terraform.io {token = \"${var.tfe_access_token}\"}"
+  }
+  type = "Opaque"
+}
+
+# Create secret to populate tfc workspaces created by the operator with sensitive values
+resource "kubernetes_secret" "tfc-workspace" {
+  metadata {
+    name = "workspacesecrets"
+    namespace = var.product_namespace
+  }
+
+  data = {
+    "credentials" = ""
   }
   type = "Opaque"
 }
