@@ -110,7 +110,7 @@ resource "argocd_application" "tfcloud-operator" {
     source {
       repo_url        = "https://helm.releases.hashicorp.com"
       chart            = "hashicorp/terraform"
-      target_revision = "v1.1.0"
+      target_revision = "1.1.0"
     }
 
     destination {
