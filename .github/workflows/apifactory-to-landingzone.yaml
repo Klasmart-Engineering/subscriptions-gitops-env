@@ -8,19 +8,10 @@ on:
   workflow_dispatch:
 
 jobs:
-  run:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        shell: bash
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-      - name: Call action
-        uses: ./.github/actions/propagate.yaml
-        with:
-          base_ref: 4a273d16
-          target_ref: MAIN
-          base_env: apifactory/uk/manifests
-          target_env: landingzone/global/manifests
+  call_propagate:
+    uses: ./.github/workflows/propagate.yaml
+    with:
+      base_ref: 4a273d16
+      target_ref: MAIN
+      base_env: apifactory/uk/manifests
+      target_env: landingzone/global/manifests
