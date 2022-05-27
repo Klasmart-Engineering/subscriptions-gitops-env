@@ -102,3 +102,8 @@ variable "container_registry_credentials" {
   description = "Credentials for the container registry so that k8s can pull application images"
   type        = string
 }
+
+variable "tfe_access_token" {
+  description = "Terraform Cloud access token for the Kubernetes operator"
+  type = string
+}

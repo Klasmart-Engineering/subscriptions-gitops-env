@@ -31,6 +31,8 @@ module "service_instance" {
 
   domain = local.domain
 
+  tfe_access_token = var.tfe_access_token
+
   providers = {
     aws            = aws
     kubernetes     = kubernetes
