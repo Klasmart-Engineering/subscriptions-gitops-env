@@ -7,11 +7,7 @@ metadata:
 spec:
   organization: {{ .Values.tf_organization }}
   secretsMountPath: "/tmp/secrets"
-  sshKeyID:
-    valueFrom:
-      configMapKeyRef:
-        name: tfe-module-deps
-        key: tfe_ssh_key_id
+  sshKeyID: "TFC GitHub"
   module:
     source: "git@github.com:KL-Engineering/subscriptions-terraform-module.git?ref=v0.1.0"
   outputs:
