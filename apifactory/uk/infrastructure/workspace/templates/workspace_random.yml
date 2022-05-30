@@ -14,6 +14,15 @@ spec:
     - key: my_bucket_region
       moduleOutputName: bucket_region
   variables:
+    - key: aws_target_role_arn
+      sensitive: true
+      environmentVariable: false
+    - key: aws_session_name
+      sensitive: true
+      environmentVariable: false
+    - key: aws_target_external_id
+      sensitive: true
+      environmentVariable: false
     - key: CONFIRM_DESTROY
       value: "1"
       sensitive: false
