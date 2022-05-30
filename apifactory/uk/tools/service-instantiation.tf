@@ -38,7 +38,8 @@ module "service_instance" {
 
   tfe_access_token = var.tfe_access_token
 
-  tfe_ssh_key_id = data.tfe_ssh_key.deploy.id
+  # tfe_ssh_key_id = data.tfe_ssh_key.deploy.id
+  tfe_ssh_key_id = var.tfe_deploy_ssh_key_id
 
   providers = {
     aws            = aws
