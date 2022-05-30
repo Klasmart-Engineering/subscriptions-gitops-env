@@ -55,7 +55,7 @@ resource "kubernetes_secret" "tfc-workspace" {
 # Create config-map with non-sensitive terraform outputs for the tfe workspace
 resource "kubernetes_config_map" "example" {
   metadata {
-    name = "tfe_module_deps"
+    name = "tfe-module-deps"
   }
 
   data = {
