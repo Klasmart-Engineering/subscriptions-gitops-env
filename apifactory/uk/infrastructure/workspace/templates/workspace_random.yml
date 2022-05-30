@@ -11,7 +11,7 @@ spec:
   module:
     source: "git@github.com:KL-Engineering/subscriptions-terraform-module.git?ref=v0.1.1"
   outputs:
-    - key: my_bucket_region
+    - key: the_bucket_region
       moduleOutputName: bucket_region
   variables:
     - key: region
