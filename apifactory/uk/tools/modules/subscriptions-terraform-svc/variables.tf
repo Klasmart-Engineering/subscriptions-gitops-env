@@ -121,3 +121,7 @@ variable "aws_target_external_id" {
   description = "The external id terraform requires to assume a role to create resources in AWS"
   type = string
 }
+variable "tfe_ssh_key_id" {
+  description = "The SSH key id registered with TFE to clone private git repos"
+  type = string
+}

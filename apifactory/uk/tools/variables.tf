@@ -12,3 +12,9 @@ variable "tfe_access_token" {
   description = "Terraform Cloud access token for the Kubernetes operator"
   type = string
 }
+
+variable "tfe_deploy_ssh_key_id" {
+  description = "Name of the SSH key to authenticate with for Git-SSH based service module imports"
+  type        = string
+  default     = "TFC GitHub"
+}

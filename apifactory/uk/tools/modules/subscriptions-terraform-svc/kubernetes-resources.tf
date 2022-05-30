@@ -16,7 +16,7 @@
 // Inject Secrets & Configuration Variables into kubernetes via secrets & config maps
 
 
-# TODO: Rename this to produce
+# TODO: Rename this to product
 resource "kubernetes_namespace" "offering" {
   metadata {
     name = var.product_namespace
@@ -50,6 +50,17 @@ resource "kubernetes_secret" "tfc-workspace" {
     aws_target_external_id  = var.aws_target_external_id
   }
   type = "Opaque"
+}
+
+# Create config-map with non-sensitive terraform outputs for the tfe workspace
+resource "kubernetes_config_map" "example" {
+  metadata {
+    name = "tfe_module_deps"
+  }
+
+  data = {
+    tfe_ssh_key_id        = var.tfe_ssh_key_id
+  }
 }
 
 

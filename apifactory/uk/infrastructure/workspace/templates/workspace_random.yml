@@ -7,30 +7,17 @@ metadata:
 spec:
   organization: {{ .Values.tf_organization }}
   secretsMountPath: "/tmp/secrets"
+  sshKeyID:
+    valueFrom:
+      configMapKeyRef:
+        name: tfe_module_deps
+        key: tfe_ssh_key_id
   module:
-    source: "joatmon08/hello/random"
-    version: "5.0.0"
+    source: "git@github.com:KL-Engineering/subscriptions-terraform-module.git?ref=v0.1.0"
   outputs:
-    - key: pet
-      moduleOutputName: pet
-    - key: list_of_pets
-      moduleOutputName: list_of_pets
-    - key: quoted_some_key
-      moduleOutputName: quoted_some_key
+    - key: my_bucket_region
+      moduleOutputName: bucket_region
   variables:
-    - key: hellos
-      value: |
-        {
-          hello="pet"
-          second_hello="universe"
-        }
-      hcl: true
-      sensitive: false
-      environmentVariable: false
-    - key: some_key
-      sensitive: false
-      value: '"something"'
-      environmentVariable: false
     - key: CONFIRM_DESTROY
       value: "1"
       sensitive: false
