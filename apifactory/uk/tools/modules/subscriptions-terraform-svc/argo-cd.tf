@@ -92,6 +92,10 @@ resource "argocd_application" "istio" {
 }
 
 resource "argocd_application" "tfcloud-operator" {
+  depends_on = [
+    kubernetes_secret.terraformrc,
+    kubernetes_secret.workspacesecrets
+  ]
   metadata {
     name      = "tfe-operator-${local.name_suffix}"
     namespace = var.argocd_namespace
