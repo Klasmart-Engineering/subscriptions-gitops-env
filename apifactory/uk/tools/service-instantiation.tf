@@ -15,6 +15,11 @@ module "service_instance" {
 
   logs_bucket_id = local.dep_account.logs_bucket_id
 
+  # Terraform operator workspaces
+  aws_target_role_arn = local.dep_meta.aws_target_role_arn
+  aws_session_name = local.dep_meta.aws_session_name
+  aws_target_external_id = local.dep_meta.aws_target_external_id
+
   # Kubernetes
   kubernetes_server_url = local.cluster_endpoint
   product_namespace = local.product_namespace

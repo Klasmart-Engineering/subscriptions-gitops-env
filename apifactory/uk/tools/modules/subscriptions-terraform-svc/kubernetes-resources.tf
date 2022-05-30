@@ -36,6 +36,7 @@ resource "kubernetes_secret" "tfc-token" {
   type = "Opaque"
 }
 
+
 # Create secret to populate tfc workspaces created by the operator with sensitive values
 resource "kubernetes_secret" "tfc-workspace" {
   metadata {
@@ -44,7 +45,9 @@ resource "kubernetes_secret" "tfc-workspace" {
   }
 
   data = {
-    "credentials" = ""
+    aws_target_role_arn = var.aws_target_role_arn
+    aws_session_name = var.aws_session_name
+    aws_target_external_id  = var.aws_target_external_id
   }
   type = "Opaque"
 }
