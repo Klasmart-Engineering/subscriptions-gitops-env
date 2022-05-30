@@ -23,7 +23,7 @@ data "tfe_outputs" "cluster-infra-tools" {
   workspace    = "cluster-infra-tools-prod"
 }
 
-data "tfe_ssh_key" "deploy" {
-  name         = var.tfe_deploy_ssh_key_id
-  organization = local.terraform_organization
-}
+# data "tfe_ssh_key" "deploy" {
+#   name         = var.tfe_deploy_ssh_key_id
+#   organization = local.terraform_organization
+# }
