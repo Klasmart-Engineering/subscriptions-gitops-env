@@ -6,7 +6,7 @@ resource "kubernetes_namespace" "offering" {
 }
 
 # Create secret to allow kubernetes to access terraform cloud
-resource "kubernetes_secret" "tfc-token" {
+resource "kubernetes_secret" "tfe-token" {
   metadata {
     name      = "terraformrc"
     namespace = var.product_namespace
@@ -20,7 +20,7 @@ resource "kubernetes_secret" "tfc-token" {
 
 
 # Create secret to populate tfc workspaces created by the operator with sensitive values
-resource "kubernetes_secret" "tfc-workspace" {
+resource "kubernetes_secret" "tfe-workspace" {
   metadata {
     name      = "workspacesecrets"
     namespace = var.product_namespace

@@ -94,8 +94,8 @@ resource "argocd_application" "istio" {
 resource "argocd_application" "tfe-operator" {
   count = var.enable_tfe_operator ? 1 : 0
   depends_on = [
-    kubernetes_secret.tfc-token,
-    kubernetes_secret.tfc-workspace
+    kubernetes_secret.tfe-token,
+    kubernetes_secret.tfe-workspace
   ]
   metadata {
     name      = "tfe-operator-${local.name_suffix}"
