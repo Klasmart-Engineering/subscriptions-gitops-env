@@ -42,7 +42,6 @@ module "service_instance" {
   tfe_ssh_key_id = var.tfe_deploy_ssh_key_id
 
   providers = {
-    aws            = aws
     kubernetes     = kubernetes
   }
 }

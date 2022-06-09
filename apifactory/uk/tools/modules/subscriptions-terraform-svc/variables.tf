@@ -103,25 +103,38 @@ variable "container_registry_credentials" {
   type        = string
 }
 
-variable "tfe_access_token" {
+# Used by terraform operator
+variable "enable_tfe_operator" {
+  description = "Flag to enable the terraform kubernetes operator"
+  type        = bool
+  default     = true
+}
+
+variable "tfe_operator_access_token" {
   description = "Terraform Cloud access token for the Kubernetes operator"
-  type = string
+  type        = string
+}
+
+variable "tfe_operator_helm_chart_version" {
+  description = "Terraform Operator Helm Chart version"
+  default     = "1.1.0"
+  type        = string
 }
 
 # Used by terraform operator
 variable "aws_target_role_arn" {
   description = "The role arn terraform requires to assume to create resources in AWS"
-  type = string
+  type        = string
 }
 variable "aws_session_name" {
   description = "The session_name terraform requires to assume a role to create resources in AWS"
-  type = string
+  type        = string
 }
 variable "aws_target_external_id" {
   description = "The external id terraform requires to assume a role to create resources in AWS"
-  type = string
+  type        = string
 }
 variable "tfe_ssh_key_id" {
   description = "The SSH key id registered with TFE to clone private git repos"
-  type = string
+  type        = string
 }
