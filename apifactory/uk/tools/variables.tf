@@ -10,7 +10,7 @@ variable "ghcr_credentials" {
 
 variable "tfe_access_token" {
   description = "Terraform Cloud access token for the Kubernetes operator"
-  type = string
+  type        = string
 }
 
 variable "tfe_deploy_ssh_key_id" {
