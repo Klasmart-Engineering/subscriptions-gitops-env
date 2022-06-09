@@ -140,10 +140,10 @@ resource "argocd_application" "tfe-operator" {
   }
 }
 
-resource "argocd_application" "product-infra-workspace" {
-  # count = ....
+resource "argocd_application" "product-infra-workspaces" {
+  for_each = toset(var.terraform_argocd_apps)
   metadata {
-    name      = "${var.project}-infrastructure-${local.name_suffix}"
+    name      = "${each.key}-infrastructure-${local.name_suffix}"
     namespace = var.argocd_namespace
     labels = {
       region = var.region
@@ -160,7 +160,7 @@ resource "argocd_application" "product-infra-workspace" {
     source {
       repo_url = var.helm_chart_url
       # TODO: Turn this into an array, rather than a single hardcoded value. So if there are more apps, each app can have each own infra
-      path            = "${local.project_environment}/${local.project_region}/infrastructure/workspace"
+      path            = "${local.project_environment}/${local.project_region}/infrastructure/${each.key}"
       target_revision = "main"
       helm {
         value_files = ["values.yaml"]

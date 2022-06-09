@@ -20,6 +20,9 @@ module "service_instance" {
   aws_session_name = local.dep_meta.aws_session_name
   aws_target_external_id = local.dep_meta.aws_target_external_id
 
+  # Subscription Terraform helm chart applications
+  terraform_argocd_apps = ["workspace"]
+
   # Kubernetes
   kubernetes_server_url = local.cluster_endpoint
   product_namespace = local.product_namespace

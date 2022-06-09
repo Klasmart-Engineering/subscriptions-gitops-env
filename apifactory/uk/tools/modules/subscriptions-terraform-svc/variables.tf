@@ -121,6 +121,11 @@ variable "tfe_operator_helm_chart_version" {
   type        = string
 }
 
+variable "terraform_argocd_apps" {
+  description = "The argocd driven terraform applications"
+  type  = list
+}
+
 # Used by terraform operator
 variable "aws_target_role_arn" {
   description = "The role arn terraform requires to assume to create resources in AWS"
