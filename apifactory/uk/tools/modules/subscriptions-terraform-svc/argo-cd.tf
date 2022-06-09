@@ -141,6 +141,9 @@ resource "argocd_application" "tfe-operator" {
 }
 
 resource "argocd_application" "product-infra-workspaces" {
+  depends_on = [
+    argocd_application.tfe-operator,
+  ]
   for_each = toset(var.terraform_argocd_apps)
   metadata {
     name      = "${each.key}-infrastructure-${local.name_suffix}"

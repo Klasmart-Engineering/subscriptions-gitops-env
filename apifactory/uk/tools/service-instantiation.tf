@@ -1,7 +1,7 @@
 module "service_instance" {
   # Module import info here
   # source  = "git@github.com:KL-Engineering/subscriptions-terraform-svc.git?ref=v0.4.0"
-  source  = "./modules/subscriptions-terraform-svc"
+  source = "./modules/subscriptions-terraform-svc"
 
   # Passthrough inputs
   region              = local.dep_meta.region
@@ -16,26 +16,26 @@ module "service_instance" {
   logs_bucket_id = local.dep_account.logs_bucket_id
 
   # Terraform operator workspaces
-  aws_target_role_arn = local.dep_meta.aws_target_role_arn
-  aws_session_name = local.dep_meta.aws_session_name
+  aws_target_role_arn    = local.dep_meta.aws_target_role_arn
+  aws_session_name       = local.dep_meta.aws_session_name
   aws_target_external_id = local.dep_meta.aws_target_external_id
 
   # Subscription Terraform helm chart applications
   terraform_argocd_apps = ["workspace"]
 
   # Kubernetes
-  kubernetes_server_url = local.cluster_endpoint
-  product_namespace = local.product_namespace
+  kubernetes_server_url          = local.cluster_endpoint
+  product_namespace              = local.product_namespace
   container_registry_credentials = local.container_registry_credentials
 
   # ArgoCD
   argocd_namespace = local.argocd_namespace
-  argocd_project = local.argocd_project_name
+  argocd_project   = local.argocd_project_name
 
   # Helm
-  helm_chart_url = "git@github.com:KL-Engineering/subscriptions-gitops-env.git"
+  helm_chart_url                   = "git@github.com:KL-Engineering/subscriptions-gitops-env.git"
   microgateway_helm_chart_revision = "HEAD"
-  istio_helm_chart_revision = "HEAD"
+  istio_helm_chart_revision        = "HEAD"
 
   domain = local.domain
 
@@ -45,7 +45,7 @@ module "service_instance" {
   tfe_ssh_key_id = var.tfe_deploy_ssh_key_id
 
   providers = {
-    kubernetes     = kubernetes
-    argocd         = argocd
+    kubernetes = kubernetes
+    argocd     = argocd
   }
 }
