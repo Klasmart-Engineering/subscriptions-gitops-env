@@ -115,7 +115,7 @@ resource "argocd_application" "tfe-operator" {
     source {
       repo_url        = "https://helm.releases.hashicorp.com"
       chart           = "terraform"
-      target_revision = var.tfe_helm_chart_version
+      target_revision = var.tfe_operator_helm_chart_version
     }
 
     destination {
