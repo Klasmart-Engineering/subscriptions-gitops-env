@@ -13,7 +13,7 @@ resource "kubernetes_secret" "tfe-token" {
   }
 
   data = {
-    "credentials" = "credentials app.terraform.io {token = \"${var.tfe_access_token}\"}"
+    "credentials" = "credentials app.terraform.io {token = \"${var.tfe_operator_access_token}\"}"
   }
   type = "Opaque"
 }
