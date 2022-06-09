@@ -143,7 +143,7 @@ resource "argocd_application" "tfe-operator" {
 resource "argocd_application" "product-infra-workspace" {
   # count = ....
   metadata {
-    name      = "infrastructure-${local.name_suffix}"
+    name      = "${var.project}-infrastructure-${local.name_suffix}"
     namespace = var.argocd_namespace
     labels = {
       region = var.region
