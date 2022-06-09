@@ -1,3 +1,13 @@
+# Required to retrieve AWS-based EKS information
+provider "aws" {
+  region = local.dep_meta.region
+  assume_role {
+    role_arn     = local.dep_meta.aws_target_role_arn
+    session_name = local.dep_meta.aws_session_name
+    external_id  = local.dep_meta.aws_target_external_id
+  }
+}
+
 # Kubernetes layer
 provider "kubernetes" {
   host                   = local.cluster_endpoint

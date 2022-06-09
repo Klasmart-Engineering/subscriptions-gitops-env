@@ -43,5 +43,6 @@ module "service_instance" {
 
   providers = {
     kubernetes     = kubernetes
+    argocd         = argocd
   }
 }
