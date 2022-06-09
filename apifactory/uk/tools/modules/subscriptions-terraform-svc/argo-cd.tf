@@ -91,10 +91,11 @@ resource "argocd_application" "istio" {
   }
 }
 
-resource "argocd_application" "tfcloud-operator" {
+resource "argocd_application" "tfe-operator" {
+  count = var.enable_tfe_operator ? 1 : 0
   depends_on = [
-    kubernetes_secret.terraformrc,
-    kubernetes_secret.workspacesecrets
+    kubernetes_secret.tfe-token,
+    kubernetes_secret.tfe-workspace
   ]
   metadata {
     name      = "tfe-operator-${local.name_suffix}"
@@ -113,8 +114,8 @@ resource "argocd_application" "tfcloud-operator" {
     project = var.argocd_project
     source {
       repo_url        = "https://helm.releases.hashicorp.com"
-      chart            = "terraform"
-      target_revision = "1.1.0"
+      chart           = "terraform"
+      target_revision = var.tfe_operator_helm_chart_version
     }
 
     destination {
@@ -139,9 +140,10 @@ resource "argocd_application" "tfcloud-operator" {
   }
 }
 
-resource "argocd_application" "workspace-random" {
+resource "argocd_application" "product-infra-workspaces" {
+  for_each = toset(var.terraform_argocd_apps)
   metadata {
-    name      = "tfe-workspace-random-${local.name_suffix}"
+    name      = "${each.key}-infrastructure-${local.name_suffix}"
     namespace = var.argocd_namespace
     labels = {
       region = var.region
@@ -156,8 +158,9 @@ resource "argocd_application" "workspace-random" {
   spec {
     project = var.argocd_project
     source {
-      repo_url        = var.helm_chart_url
-      path            = "${local.project_environment}/${local.project_region}/infrastructure/workspace"
+      repo_url = var.helm_chart_url
+      # TODO: Turn this into an array, rather than a single hardcoded value. So if there are more apps, each app can have each own infra
+      path            = "${local.project_environment}/${local.project_region}/infrastructure/${each.key}"
       target_revision = "main"
       helm {
         value_files = ["values.yaml"]

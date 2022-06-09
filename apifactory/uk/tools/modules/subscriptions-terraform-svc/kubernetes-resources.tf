@@ -1,21 +1,3 @@
-# data service database password secret
-/* resource "kubernetes_secret" "data_db" {
-  metadata {
-    name      = "data-service-db"
-    namespace = var.data_service_namespace
-  }
-
-  data = {
-    dataname = local.data_service_master_dataname
-    password = local.data_service_db_password
-    hostname = local.data_service_endpoint
-    db_port  = local.data_service_db_port
-    db_name  = local.data_service_db_name
-  }
-} */
-// Inject Secrets & Configuration Variables into kubernetes via secrets & config maps
-
-
 # TODO: Rename this to product
 resource "kubernetes_namespace" "offering" {
   metadata {
@@ -24,50 +6,49 @@ resource "kubernetes_namespace" "offering" {
 }
 
 # Create secret to allow kubernetes to access terraform cloud
-resource "kubernetes_secret" "tfc-token" {
+resource "kubernetes_secret" "tfe-token" {
   metadata {
-    name = "terraformrc"
+    name      = "terraformrc"
     namespace = var.product_namespace
   }
 
   data = {
-    "credentials" = "credentials app.terraform.io {token = \"${var.tfe_access_token}\"}"
+    "credentials" = "credentials app.terraform.io {token = \"${var.tfe_operator_access_token}\"}"
   }
   type = "Opaque"
 }
 
 
 # Create secret to populate tfc workspaces created by the operator with sensitive values
-resource "kubernetes_secret" "tfc-workspace" {
+resource "kubernetes_secret" "tfe-workspace" {
   metadata {
-    name = "workspacesecrets"
+    name      = "workspacesecrets"
     namespace = var.product_namespace
   }
 
   data = {
-    aws_target_role_arn = var.aws_target_role_arn
-    aws_session_name = var.aws_session_name
-    aws_target_external_id  = var.aws_target_external_id
+    aws_target_role_arn    = var.aws_target_role_arn
+    aws_session_name       = var.aws_session_name
+    aws_target_external_id = var.aws_target_external_id
   }
   type = "Opaque"
 }
 
 # Create config-map with non-sensitive terraform outputs for the tfe workspace
-resource "kubernetes_config_map" "example" {
+resource "kubernetes_config_map" "tf-output" {
   metadata {
-    name = "tfe-module-deps"
+    name = "tf-output-${var.project}-${local.name_suffix}"
   }
 
   data = {
-    tfe_ssh_key_id        = var.tfe_ssh_key_id
+    tfe_ssh_key_id = var.tfe_ssh_key_id
   }
 }
-
 
 # Create secret to allow kubernetes access to the Container Registry
 resource "kubernetes_secret" "container-registry-secret" {
   metadata {
-    name = "dockerconfigjson-ghcr"
+    name      = "dockerconfigjson-ghcr"
     namespace = var.product_namespace
   }
 

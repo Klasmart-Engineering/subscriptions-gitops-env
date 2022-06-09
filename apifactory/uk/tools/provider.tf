@@ -1,3 +1,4 @@
+# Required to retrieve AWS-based EKS information
 provider "aws" {
   region = local.dep_meta.region
   assume_role {

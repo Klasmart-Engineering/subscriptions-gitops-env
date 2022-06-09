@@ -20,6 +20,9 @@ module "service_instance" {
   aws_session_name = local.dep_meta.aws_session_name
   aws_target_external_id = local.dep_meta.aws_target_external_id
 
+  # Subscription Terraform helm chart applications
+  terraform_argocd_apps = ["workspace"]
+
   # Kubernetes
   kubernetes_server_url = local.cluster_endpoint
   product_namespace = local.product_namespace
@@ -36,13 +39,13 @@ module "service_instance" {
 
   domain = local.domain
 
-  tfe_access_token = var.tfe_access_token
+  tfe_operator_access_token = var.tfe_access_token
 
   # tfe_ssh_key_id = data.tfe_ssh_key.deploy.id
   tfe_ssh_key_id = var.tfe_deploy_ssh_key_id
 
   providers = {
-    aws            = aws
     kubernetes     = kubernetes
+    argocd         = argocd
   }
 }
