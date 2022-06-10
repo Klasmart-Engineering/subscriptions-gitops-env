@@ -25,5 +25,5 @@ appVersion: "v0.1.6"
 
 dependencies:
   - name: kl-base-terraform
-    repository: https://raw.githubusercontent.com/kl-engineering/terraform-base-helm/main
+    repository: https://raw.githubusercontent.com/KL-Engineering/terraform-base-helm/main
     version: 0.1.0
