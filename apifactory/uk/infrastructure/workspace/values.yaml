@@ -9,3 +9,6 @@ kl-base-terraform:
     version: v0.1.6
   provider_config:
     aws_region: eu-west-2
+  outputs:
+    - key: the_bucket_region
+      moduleOutputName: bucket_region
