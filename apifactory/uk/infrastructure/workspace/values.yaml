@@ -2,5 +2,10 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-fullnameOverride: "workspace-apifactory-uk"
-tf_organization: "kidsloop-infrastructure"
+kl-base-terraform:
+  fullnameOverride: "workspace-apifactory-uk"
+  module:
+    source: git@github.com:KL-Engineering/subscriptions-terraform-module.git
+    version: v0.1.6
+  provider_config:
+    aws_region: eu-west-2
