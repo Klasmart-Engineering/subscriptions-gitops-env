@@ -32,9 +32,10 @@ module "service_instance" {
   argocd_project   = local.argocd_project_name
 
   # Helm
-  helm_chart_url                   = "git@github.com:KL-Engineering/subscriptions-gitops-env.git"
-  microgateway_helm_chart_revision = "HEAD"
-  istio_helm_chart_revision        = "HEAD"
+  helm_chart_url                           = "git@github.com:KL-Engineering/subscriptions-gitops-env.git"
+  microgateway_helm_chart_revision         = "HEAD"
+  istio_helm_chart_revision                = "HEAD"
+  subscriptionsservice_helm_chart_revision = "HEAD"
 
   domain = local.domain
 
