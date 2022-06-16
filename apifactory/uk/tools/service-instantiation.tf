@@ -1,6 +1,6 @@
 module "service_instance" {
   # Module import info here
-  source  = "git@github.com:KL-Engineering/subscriptions-terraform-svc.git?ref=v0.4.0"
+  source  = "git@github.com:KL-Engineering/subscriptions-terraform-svc.git?ref=v0.6.0"
 
   # Passthrough inputs
   region              = local.dep_meta.region
@@ -19,9 +19,6 @@ module "service_instance" {
   aws_session_name       = local.dep_meta.aws_session_name
   aws_target_external_id = local.dep_meta.aws_target_external_id
 
-  # Subscription Terraform helm chart applications
-  terraform_argocd_apps = ["workspace"]
-
   # Kubernetes
   kubernetes_server_url          = local.cluster_endpoint
   product_namespace              = local.product_namespace
@@ -31,10 +28,15 @@ module "service_instance" {
   argocd_namespace = local.argocd_namespace
   argocd_project   = local.argocd_project_name
 
+  gitops_repo_url = "git@github.com:KL-Engineering/subscriptions-gitops-env.git"
+  gitops_revision = "HEAD"
   # Helm
-  helm_chart_url                   = "git@github.com:KL-Engineering/subscriptions-gitops-env.git"
-  microgateway_helm_chart_revision = "HEAD"
-  istio_helm_chart_revision        = "HEAD"
+  # The name of the app is the key and the suffix  "${var.project_environment}-${var.project_region}"
+  # e.g. microgateway-apifactory-uk
+  argocd_applications = ["microgateway", "istio-config"]
+
+  # Subscription Terraform helm chart applications
+  terraform_argocd_apps = ["workspace"]
 
   domain = local.domain
 
