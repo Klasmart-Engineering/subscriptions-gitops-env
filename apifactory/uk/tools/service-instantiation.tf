@@ -33,7 +33,7 @@ module "service_instance" {
   # Helm
   # The name of the app is the key and the suffix  "${var.project_environment}-${var.project_region}"
   # e.g. microgateway-apifactory-uk
-  argocd_applications = ["microgateway", "istio-config"]
+  argocd_applications = ["microgateway", "istio-config", "subscriptionsservice"]
 
   # Subscription Terraform helm chart applications
   terraform_argocd_apps = ["workspace"]

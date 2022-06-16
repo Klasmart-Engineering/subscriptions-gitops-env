@@ -1,0 +1,5 @@
+apiVersion: v2
+name: subscriptions-service
+description: A Helm chart for Subscriptions Service
+type: application
+version: 0.1.0
