@@ -37,10 +37,6 @@ kl-base-terraform:
       value: subscriptions
       sensitive: false
       environmentVariable: false
-    - key: tags
-      value: {createdFor: 'Subscriptions'}
-      sensitive: false
-      environmentVariable: false
     - key: db_name
       value: subscriptions_db
       sensitive: false
@@ -50,10 +46,10 @@ kl-base-terraform:
       sensitive: false
       environmentVariable: false
     - key: enhanced_monitoring_role_enabled
-      value: false
+      value: "false"
       sensitive: false
       environmentVariable: false
     - key: deletion_protection
-      value: false
+      value: "false"
       sensitive: false
       environmentVariable: false
