@@ -6,20 +6,12 @@ kl-base-terraform:
   fullnameOverride: workspace-apifactory-uk
   module:
     source: git@github.com:KL-Engineering/subscriptions-terraform-module.git
-    version: v1.0.4
+    version: v1.0.5
   provider_config:
     aws_region: eu-west-2
   outputs:
-    - key: db_endpoint
-      moduleOutputName: db_endpoint
-    - key: db_name
-      moduleOutputName: db_name
-    - key: db_master_username
-      moduleOutputName: db_master_username
-    - key: db_password
-      moduleOutputName: db_password
-    - key: db_port
-      moduleOutputName: db_port
+    - key: db_output_secret
+      moduleOutputName: db_output_secret
   variables:
     - key: project_environment
       value: apifactory
