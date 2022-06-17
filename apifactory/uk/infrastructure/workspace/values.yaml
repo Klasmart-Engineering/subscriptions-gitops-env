@@ -13,6 +13,10 @@ kl-base-terraform:
     - key: db_output_secret
       moduleOutputName: db_output_secret
   variables:
+    - key: monitoring_interval
+      value: 0
+      sensitive: false
+      environmentVariable: false
     - key: project_environment
       value: apifactory
       sensitive: false
