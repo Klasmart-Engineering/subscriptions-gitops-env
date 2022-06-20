@@ -28,6 +28,31 @@ spec:
           env:
             - name: PROFILE
               value: apifactory-uk
+            - name: DATABASE_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: tf-outputs
+                  key: hostname
+            - name: DATABASE_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: tf-outputs
+                  key: db_port
+            - name: DATABASE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: tf-outputs
+                  key: username
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: tf-outputs
+                  key: password
+            - name: DATABASE_DATABASENAME
+              valueFrom:
+                secretKeyRef:
+                  name: tf-outputs
+                  key: db_name
           readinessProbe:
             httpGet:
               scheme: HTTP
