@@ -2,7 +2,7 @@ appName: subscriptions
 image:
   image: ghcr.io/kl-engineering/subscriptions
   pullPolicy: IfNotPresent
-  tag: v0.1.14
+  tag: v0.1.15
 replicaCount: 2
 imagePullSecret: dockerconfigjson-ghcr
 serviceAccountName: subscriptions-sa
