@@ -2,7 +2,7 @@ global:
   image:
     repository: ghcr.io/kl-engineering/subscriptions-microgateway
     pullPolicy: Always
-    tag: 0.0.15
+    tag: 0.0.17
 
   region: "uk"
   environment: "apifactory"
