@@ -21,37 +21,6 @@ spec:
         - name: setup
           image: busybox
           command: ['sh', '-c', "while true; do sleep 1; done"]
-          env:
-          - name: PGPASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: tf-outputs
-                key: db_master_password
-          - name: DATABASE_MASTER_USER
-            valueFrom:
-              secretKeyRef:
-                name: tf-outputs
-                key: db_master_usename
-          - name: DATABASE_HOST
-            valueFrom:
-              secretKeyRef:
-                name: tf-outputs
-                key: db_hostname
-          - name: USERNAME
-            valueFrom:
-              secretKeyRef:
-                name: tf-outputs
-                key: db_username
-          - name: PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: tf-outputs
-                key: db_password
-          - name: NAME
-            valueFrom:
-              secretKeyRef:
-                name: tf-outputs
-                key: db_logical_name
       containers:
         - name: {{ .Values.appName }}
           image: "{{ .Values.image.repository }}{{ .Values.image.image }}:{{ .Values.image.tag }}"
