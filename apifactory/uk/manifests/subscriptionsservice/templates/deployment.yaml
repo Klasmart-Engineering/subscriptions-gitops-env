@@ -22,10 +22,9 @@ spec:
           image: tmaier/postgresql-client
           command: ["/usr/bin/psql"]
           args:
-            - "-h"
-            - $(DATABASE_HOST)
-            - "-U"
-            - $(DATABASE_MASTER_USER)
+            - "--host=$(DATABASE_HOST)"
+            - "--port=5432"
+            - "--username=$(DATABASE_MASTER_USER)"
             - "CREATE USER $(USERNAME) WITH PASSWORD $(PASSWORD); CREATE DATABASE $(NAME); GRANT ALL PRIVILEGES ON DATABASE $(NAME) TO $(USERNAME);"
           env:
           - name: PGPASSWORD
