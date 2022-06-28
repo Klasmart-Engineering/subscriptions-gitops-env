@@ -20,13 +20,13 @@ spec:
       initContainers:
         - name: setup
           image: tmaier/postgresql-client
-          command:
-          - "/usr/bin/psql"
-          - "-h"
-          - "${DATABASE_HOST}"
-          - "-U"
-          - "${DATABASE_MASTER_USER}"
-          - "CREATE USER ${USERNAME} WITH PASSWORD ${PASSWORD}; CREATE DATABASE ${NAME}; GRANT ALL PRIVILEGES ON DATABASE ${NAME} TO ${USERNAME};"
+          command: ["/usr/bin/psql"]
+          args:
+            - "-h"
+            - "$(DATABASE_HOST)"
+            - "-U"
+            - "$(DATABASE_MASTER_USER)"
+            - "CREATE USER $(USERNAME) WITH PASSWORD $(PASSWORD); CREATE DATABASE $(NAME); GRANT ALL PRIVILEGES ON DATABASE $(NAME) TO $(USERNAME);"
           env:
           - name: PGPASSWORD
             valueFrom:
