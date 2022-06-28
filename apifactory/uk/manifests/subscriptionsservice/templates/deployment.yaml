@@ -17,6 +17,46 @@ spec:
       imagePullSecrets:
         - name: {{ .Values.imagePullSecret }}
       serviceAccountName: {{ .Values.serviceAccountName }}
+      initContainers:
+        - name: setup
+          image: tmaier/postgresql-client
+          command:
+          - "-h"
+          - "${DATABASE_HOST}"
+          - "-U"
+          - "${DATABASE_MASTER_USER}"
+          - "CREATE USER ${USERNAME} WITH PASSWORD ${PASSWORD}; CREATE DATABASE ${NAME}; GRANT ALL PRIVILEGES ON DATABASE ${NAME} TO ${USERNAME};"
+          env:
+          - name: PGPASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: tf-outputs
+                key: db_master_password
+          - name: DATABASE_MASTER_USER
+            valueFrom:
+              secretKeyRef:
+                name: tf-outputs
+                key: db_master_usename
+          - name: DATABASE_HOST
+            valueFrom:
+              secretKeyRef:
+                name: tf-outputs
+                key: hostname
+          - name: USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: tf-outputs
+                key: db_username
+          - name: PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: tf-outputs
+                key: db_password
+          - name: NAME
+            valueFrom:
+              secretKeyRef:
+                name: tf-outputs
+                key: db_logical_name
       containers:
         - name: {{ .Values.appName }}
           image: "{{ .Values.image.repository }}{{ .Values.image.image }}:{{ .Values.image.tag }}"
