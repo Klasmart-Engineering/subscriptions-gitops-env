@@ -34,7 +34,7 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: tf-outputs
-                key: db_master_usename
+                key: db_master_username
           - name: DATABASE_HOST
             valueFrom:
               secretKeyRef:
