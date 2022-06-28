@@ -19,13 +19,8 @@ spec:
       serviceAccountName: {{ .Values.serviceAccountName }}
       initContainers:
         - name: setup
-          image: tmaier/postgresql-client
-          command: ["/usr/bin/psql"]
-          args:
-            - "--host=$(DATABASE_HOST)"
-            - "--port=5432"
-            - "--username=$(DATABASE_MASTER_USER)"
-            - "CREATE USER $(USERNAME) WITH PASSWORD $(PASSWORD); CREATE DATABASE $(NAME); GRANT ALL PRIVILEGES ON DATABASE $(NAME) TO $(USERNAME);"
+          image: busybox
+          command: ["/bin/sh"]
           env:
           - name: PGPASSWORD
             valueFrom:
