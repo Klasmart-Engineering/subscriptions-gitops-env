@@ -18,7 +18,7 @@ spec:
             - "--port=5432"
             - "--username=$(DATABASE_MASTER_USER)"
             - "--dbname=$(DATABASE_MASTER_NAME)"
-            - "CREATE USER $(USERNAME) WITH PASSWORD $(PASSWORD); CREATE DATABASE $(NAME); GRANT ALL PRIVILEGES ON DATABASE $(NAME) TO $(USERNAME);"
+            - "--command=CREATE USER $(USERNAME) WITH PASSWORD $(PASSWORD); CREATE DATABASE $(NAME); GRANT ALL PRIVILEGES ON DATABASE $(NAME) TO $(USERNAME);"
           env:
           - name: DATABASE_MASTER_NAME
             valueFrom:
