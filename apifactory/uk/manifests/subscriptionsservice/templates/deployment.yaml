@@ -42,7 +42,7 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: tf-outputs
-                key: hostname
+                key: db_hostname
           - name: USERNAME
             valueFrom:
               secretKeyRef:
