@@ -21,6 +21,7 @@ spec:
         - name: setup
           image: tmaier/postgresql-client
           command:
+          - "/usr/bin/psql"
           - "-h"
           - "${DATABASE_HOST}"
           - "-U"
