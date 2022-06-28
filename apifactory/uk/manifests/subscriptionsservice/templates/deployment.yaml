@@ -21,6 +21,7 @@ spec:
         - name: setup
           image: busybox
           command: ["/bin/sh"]
+          args: ["-c", "while true; do; sleep 1; done;"]
           env:
           - name: PGPASSWORD
             valueFrom:
