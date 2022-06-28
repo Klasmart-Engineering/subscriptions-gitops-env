@@ -17,14 +17,14 @@ spec:
             - "--host=$(DATABASE_HOST)"
             - "--port=5432"
             - "--username=$(DATABASE_MASTER_USER)"
-            - "--dbname=$(DATABASE_DATABASENAME)"
+            - "--dbname=$(DATABASE_MASTER_NAME)"
             - "CREATE USER $(USERNAME) WITH PASSWORD $(PASSWORD); CREATE DATABASE $(NAME); GRANT ALL PRIVILEGES ON DATABASE $(NAME) TO $(USERNAME);"
           env:
-          - name: DATABASE_DATABASENAME
+          - name: DATABASE_MASTER_NAME
             valueFrom:
               secretKeyRef:
                 name: tf-outputs
-                key: db_name
+                key: db_master_name
           - name: PGPASSWORD
             valueFrom:
               secretKeyRef:
