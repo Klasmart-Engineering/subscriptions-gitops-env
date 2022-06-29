@@ -17,10 +17,6 @@ spec:
       imagePullSecrets:
         - name: {{ .Values.imagePullSecret }}
       serviceAccountName: {{ .Values.serviceAccountName }}
-      initContainers:
-        - name: setup
-          image: busybox
-          command: ['sh', '-c', "while true; do sleep 1; done"]
       containers:
         - name: {{ .Values.appName }}
           image: "{{ .Values.image.repository }}{{ .Values.image.image }}:{{ .Values.image.tag }}"
